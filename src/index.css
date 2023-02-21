@@ -1,0 +1,37 @@
+body {
+  margin:0 auto;
+  font-family:'Poppins', sans-serif;
+}
+
+code {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* CAROUSEL SLIDER STYLES */
+
+html {
+  scroll-behavior: smooth;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
+/* SWEETALERT2 STYLEING  */
+.swal2-confirm{
+  background-image:linear-gradient(to right, #DE3D6D,#F5844C)!important; 
+}
+
+.swal2-input{
+ outline: none!important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

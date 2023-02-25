@@ -25,7 +25,7 @@ export const BaseRoute = () => {
           element={<ForgottenPasswordPage />}
         ></Route>
         <Route
-          path="/resetpassword/:id"
+          path="/reset-password/:id"
           element={<ResetPasswordPage />}
         ></Route>
         <Route

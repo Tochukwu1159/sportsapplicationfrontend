@@ -4,7 +4,6 @@ import mailIcon from "../assets/icon/mail.svg";
 import StyleButton from '../styles/ButtonStyles.js'
 import { UseAuth } from "../context/useAuth";
 import { ResendVerification } from "./ResendVerification";
-
 import {
   StyledContainer,
   StyledFormArea,
@@ -58,5 +57,4 @@ export const EmailSent = ({text, password, email}) => {
     </StyledContainer>
     </>
   );
-};
-
+          }

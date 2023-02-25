@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import { ResendVerification } from "../pages/ResendVerification";
+//import { ResendVerification } from "../pages/ResendVerification";
 import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
@@ -22,7 +22,7 @@ function reducer(state, action) {
         user: action.data,
       };
 
-    case "VERIFY_EMAIL":
+    case "VERIFY":
       return {
         ...state,
         user: action.data,
@@ -75,14 +75,14 @@ export const AuthProvider = ({ children }) => {
       const registerUser = {
         email: formData.email,
         username: formData.username,
-        interest:formData.interest,
+        interest: formData.interest,
         phonenumber: formData.phonenumber,
         avatar: formData.avatar,
         password: formData.password,
         confirm_password: formData.confirm_password,
       };
 
-      console.log({registerUser}, "user111")
+      console.log({ registerUser }, "user111")
 
       const res = await axios({
         method: "post",
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
         toast.success(res.data.message, {
           autoClose: 1000,
         });
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("token", res.data.token);
         setTimeout(() => {
           navigate("/verify-emailsent");
           toast.success("Verify your email", {
@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
         }, 2000);
       }
     } catch (err) {
-    console.log(err.response && err.response.data)
+      console.log(err.response && err.response.data)
 
       toast.error(err.response.data.Error, {
         autoClose: 3000,
@@ -113,13 +113,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
+  
+
+
   const login = async (formData) => {
     try {
       const loginUser = {
-       userInfo: formData.userInfo,
+        userInfo: formData.userInfo,
         password: formData.password,
       };
-      console.log({loginUser}, "user111")
+      console.log({ loginUser }, "user111")
 
       const res = await axios({
         method: "post",
@@ -143,27 +147,10 @@ export const AuthProvider = ({ children }) => {
           autoClose: 3000,
         });
         setTimeout(() => {
-        navigate(`/dashboard/${res.data.User.id}`);
-      }, 2000);
+          navigate(`/dashboard/${res.data.User.id}`);
+        }, 2000);
         return;
       }
-    
-
-
-
-  
-    //     .catch((err) => {
-    //       if (err.response.data.message === "Please verify your email") {
-    //         toast.error(err.response.data.message, {
-    //           autoClose: 3000,
-    //         });
-    //         ResendVerification();
-    //       } else {
-    //         toast.error(err.response.data.message, {
-    //           autoClose: 3000,
-    //         });
-    //       }
-    //     });
     } catch (err) {
       console.log(err)
       toast.error("Please kindly singin", {
@@ -177,31 +164,31 @@ export const AuthProvider = ({ children }) => {
   const forgotPassword = async (formData) => {
     try {
       const email = {
-       email: formData.email,
+        email: formData.email,
       };
-      console.log({forgotPassword}, "user111")
+      console.log({ forgotPassword }, "user111")
 
       const res = await axios({
         method: "post",
         url: `${process.env.REACT_APP_BACKEND_URL}/users/forgotpassword`,
         data: email
       })
-          if (res.status === 200) {
-            console.log(res);
-            // should take you to a check your email-for-reset-password-link page
-            navigate("/emailsent");
-            toast.success("Reset password sent to you email", {
-              autoClose: 3000,
-            });
-            dispatch({ type: "FORGOT_PASSWORD", payload: res.data });
-          } else {
-            toast.error(
-              "Unable to send verification Email check connectivity",
-              {
-                autoClose: 3000,
-              }
-            );
+      if (res.status === 200) {
+        console.log(res);
+        // should take you to a check your email-for-reset-password-link page
+        navigate("/emailsent");
+        toast.success("Reset password sent to you email", {
+          autoClose: 3000,
+        });
+        dispatch({ type: "FORGOT_PASSWORD", payload: res.data });
+      } else {
+        toast.error(
+          "Unable to send verification Email check connectivity",
+          {
+            autoClose: 3000,
           }
+        );
+      }
     } catch (err) {
       console.log(err);
       toast.error("No user found, kindly register", {
@@ -219,25 +206,25 @@ export const AuthProvider = ({ children }) => {
         password: formData.password,
         confirm_password: formData.confirm_password,
       };
-      console.log({password}, "user111")
+      console.log({ password }, "user111")
 
       const res = await axios({
         method: "patch",
         url: `${process.env.REACT_APP_BACKEND_URL}/users/change-password/${id}`,
         data: password
       })
-          if (res.status === 200) {
-            dispatch({
-              type: "RESET_PASSWORD",
-              payload: res.data,
-            });
-            setTimeout(() => {
-              navigate("/login");
-              toast.success("Password reset successfully", {
-                autoClose: 1500,
-              });
-            }, 2000);
-          }
+      if (res.status === 200) {
+        dispatch({
+          type: "RESET_PASSWORD",
+          payload: res.data,
+        });
+        setTimeout(() => {
+          navigate("/login");
+          toast.success("Password reset successfully", {
+            autoClose: 1500,
+          });
+        }, 2000);
+      }
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message, {
@@ -280,13 +267,13 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (formData) => {
     try {
       const form = {
-        
+
         email: formData.email || localStorage.getItem("email"),
         username: formData.username || localStorage.getItem("username"),
         interest: formData.interest || localStorage.getItem("interest"),
-        phonenumber:formData.phonenumber || localStorage.getItem("phonenumber"),
+        phonenumber: formData.phonenumber || localStorage.getItem("phonenumber"),
         avatar: formData.avatar || localStorage.getItem("avatar"),
-      
+
       };
       const id = localStorage.getItem("id");
       await axios
@@ -324,7 +311,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  
+
 
   return (
     <AuthContext.Provider
@@ -336,9 +323,12 @@ export const AuthProvider = ({ children }) => {
         updateProfile,
         resetPassword,
         logout,
+      
+
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+

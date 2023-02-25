@@ -15,7 +15,7 @@ import {
 
 import { Back, HeaderAndButton } from "../styles/registerStyle";
 
-import logo from "../assets/icon/logo2.svg";
+import logo from "../assets/icon/logo3.png";
 import backicon from "../assets/icon/backicon.svg";
 import axios from "axios";
 import ThreeDots from "react-loading-icons/dist/esm/components/three-dots";

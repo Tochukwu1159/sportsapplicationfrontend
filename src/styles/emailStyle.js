@@ -147,3 +147,12 @@ flex-grow: 0;
 
 export const Icon = styled.div`
 `
+export const OtpInput = styled.div`
+display: flex;
+justify-content: center;
+.OTP-field input{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+}
+`

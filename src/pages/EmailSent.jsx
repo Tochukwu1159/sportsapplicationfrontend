@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { Link,  } from "react-router-dom";
-import mailIcon from "../assets/icon/mail.svg"; 
 import StyleButton from '../styles/ButtonStyles.js'
 import { UseAuth } from "../context/useAuth";
 import { ResendVerification } from "./ResendVerification";
@@ -31,9 +30,6 @@ export const EmailSent = ({text, password, email}) => {
     <>
     <StyledContainer>
       <StyledFormArea>
-        <Icon>
-          <img src={mailIcon} alt="" />
-        </Icon>
         <StyledTitle>Check your email</StyledTitle>
         <StyledSubTitle>{text}</StyledSubTitle>
 

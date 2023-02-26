@@ -33,16 +33,16 @@ export const Register = () => {
   });
   const { register } = UseAuth();
 
-  console.log(formData);
+
   const handleCheckPassword = ()=>{
     if(formData.password !== formData.confirm_password && formData.confirm_password !== ""){
-      console.log("a")
+     
       setPasswordMiss(true)
     }else{
       setPasswordMiss(false)
     }
   }
-   console.log("b")
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if(formData.password === formData.confirm_password){
@@ -53,7 +53,7 @@ export const Register = () => {
     }).catch(() => {
       setShowLoading(false);
     });
-    console.log("c")
+   
     }else{
       toast.error("Password mismatch", {
         autoClose: 3000,

@@ -20,21 +20,21 @@ export const ResendVerification = () => {
       return axios
         .patch(`${process.env.REACT_APP_BACKEND_URL}/user/resendVerification`, { email })
         .then((response) => {
-            console.log(response)
+            
           if (!response.status === 200) {
             throw new Error(response.data.message);
           }
           return response;
         })
         .catch((error) => {
-            console.log(error)
+            
           Swal.showValidationMessage(`Request failed: ${error.response.data.message}`);
         });
     },
 
     allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
-    console.log(result)
+    
     if (result.value?.status === 200) {
         if(result.value.data.email_response.err){
             toast.error(result.value.data.email_response.message, {

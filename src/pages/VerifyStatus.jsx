@@ -13,16 +13,16 @@ export default function UploadAvatar() {
     formData.append("file", fileImage);
     formData.append("upload_preset", "sprint2");
     //   formData.append("myAvatar", "uujk0ogg");
-    console.log(fileImage);
-    console.log(formData);
+    
+   
     try {
       const res = await axios.post(
         "http://api.cloudinary.com/v1_1/podf-live-project/image/upload",
         formData
       );
-      console.log(res.data);
+     
     } catch (error) {
-      console.log(error);
+     
     }
   };
   return (

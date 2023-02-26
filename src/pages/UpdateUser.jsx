@@ -123,12 +123,12 @@ export const UpdateUserSetting = () => {
           setModalState(false);
         })
         .catch((err) => {
-          console.log(err);
+         
           setModalState(false);
         });
-      console.log(res.data);
+  
     } catch (error) {
-      console.log(error);
+  
       setModalState(false);
     }
     setModalState(false);

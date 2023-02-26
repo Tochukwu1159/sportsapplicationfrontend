@@ -14,17 +14,17 @@ const useFetch = (url) => {
         },
       })
       .then((response) => {
-        // console.log(response.data.content)
+       
         setShowLoading(false);
 
         if (response.status === 200) {
           setResult(response.data);
-          // console.log(result)
+         
 
         }
       })
       .catch((err) => {
-        console.log(err);
+        
         setShowLoading(false);
 
         throw new Error(err);

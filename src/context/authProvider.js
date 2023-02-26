@@ -82,7 +82,6 @@ export const AuthProvider = ({ children }) => {
         confirm_password: formData.confirm_password,
       };
 
-      console.log({ registerUser }, "user111")
 
       const res = await axios({
         method: "post",
@@ -104,7 +103,7 @@ export const AuthProvider = ({ children }) => {
         }, 2000);
       }
     } catch (err) {
-      console.log(err.response && err.response.data)
+     
 
       toast.error(err.response.data.Error, {
         autoClose: 3000,
@@ -123,7 +122,7 @@ export const AuthProvider = ({ children }) => {
         userInfo: formData.userInfo,
         password: formData.password,
       };
-      console.log({ loginUser }, "user111")
+     
 
       const res = await axios({
         method: "post",
@@ -131,10 +130,10 @@ export const AuthProvider = ({ children }) => {
         data: loginUser
       });
 
-      console.log(res, "redc000");
+    
 
       if (res.status === 200) {
-        console.log(res.data.User, "redc000");
+        
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.User.id);
         localStorage.setItem("email", res.data.User.email);
@@ -152,7 +151,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
     } catch (err) {
-      console.log(err)
+     
       toast.error("Please kindly singin", {
         autoClose: 3000,
       });
@@ -166,7 +165,7 @@ export const AuthProvider = ({ children }) => {
       const email = {
         email: formData.email,
       };
-      console.log({ forgotPassword }, "user111")
+    
 
       const res = await axios({
         method: "post",
@@ -174,7 +173,7 @@ export const AuthProvider = ({ children }) => {
         data: email
       })
       if (res.status === 200) {
-        console.log(res);
+     
         // should take you to a check your email-for-reset-password-link page
         navigate("/emailsent");
         toast.success("Reset password sent to you email", {
@@ -190,7 +189,7 @@ export const AuthProvider = ({ children }) => {
         );
       }
     } catch (err) {
-      console.log(err);
+    
       toast.error("No user found, kindly register", {
         autoClose: 3000,
       });
@@ -206,7 +205,7 @@ export const AuthProvider = ({ children }) => {
         password: formData.password,
         confirm_password: formData.confirm_password,
       };
-      console.log({ password }, "user111")
+      
 
       const res = await axios({
         method: "patch",
@@ -226,7 +225,7 @@ export const AuthProvider = ({ children }) => {
         }, 2000);
       }
     } catch (err) {
-      console.log(err);
+     
       toast.error(err.response.data.message, {
         autoClose: 3000,
       });
@@ -284,7 +283,7 @@ export const AuthProvider = ({ children }) => {
         })
         .then((response) => {
           toast.success(response.data.message);
-          console.log(response);
+         
           localStorage.setItem(
             "email",
             response.data.updatedRecord.email
